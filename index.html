@@ -3,143 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mã QR Thanh Toán</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Roboto, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #00b4db, #0083b0);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      color: #fff;
-      animation: gradient 8s ease infinite;
-      background-size: 200% 200%;
-      padding: 40px 10px;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-
-    .qr-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-    }
-
-    .qr-container {
-      background: #fff;
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-
-    .qr-container img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .qr-container img:hover {
-      transform: scale(1.03);
-    }
-
-    .info {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .info b {
-      color: #fff;
-    }
-
-    footer {
-      margin-top: 35px;
-      font-size: 14px;
-      opacity: 0.85;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 22px; }
-      .qr-container img { max-width: 90%; }
-    }
-  </style>
+  <title>QR Thanh Toán · Nguyen Van Dia</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Quét mã để chuyển khoản 💰</h1>
 
-  <div class="qr-grid">
-    <!-- Mã QR tổng hợp -->
-    <div class="card">
-      <div class="qr-container">
-        <img src="./access/qr.jpg" alt="QR Thanh Toán Tổng Hợp" />
-      </div>
-      <div class="info">
-        <b>Mã QR tổng hợp</b><br>
-        Quét để chọn ngân hàng hoặc MoMo.
-      </div>
-    </div>
+<div class="app">
 
-    <!-- Mã QR BIDV -->
-    <div class="card">
-      <div class="qr-container">
-        <img src="./access/qr_bank.jpg" alt="QR BIDV" />
-      </div>
-      <div class="info">
-        <b>Ngân hàng Vietcombank</b><br>
-        Chủ TK: <b>NGUYEN VAN DIA</b>
-      </div>
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header-badge">
+      <span>💳</span> Thanh toán nhanh · Không cần tìm album
     </div>
+    <h1 class="header-title">Quét QR Chuyển Khoản</h1>
+    <p class="header-sub">Hỗ trợ Vietcombank &amp; Ví MoMo · Nhấn vào ảnh để xem to</p>
+  </header>
 
-    <!-- Mã QR MoMo -->
-    <div class="card">
-      <div class="qr-container">
-        <img src="./access/qr_momo.jpg" alt="QR MoMo" />
+  <!-- ===== QR Grid ===== -->
+  <main class="main">
+    <div class="qr-grid">
+
+      <!-- Card: QR Tổng hợp -->
+      <div class="card card--general">
+        <div class="card-logo-wrap">
+          <span class="icon">🏦</span>
+        </div>
+
+        <div class="qr-wrapper">
+          <img src="./access/qr.jpg" alt="QR Tổng hợp" class="qr-img" />
+          <div class="qr-overlay">
+            <span class="overlay-icon">🔍</span>
+            <span class="overlay-text">Xem to</span>
+          </div>
+        </div>
+
+        <div class="card-info">
+          <p class="card-service">Mã QR tổng hợp · Đa ngân hàng</p>
+          <p class="card-owner">NGUYEN VAN DIA</p>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn--download" onclick="downloadQR('./access/qr.jpg', 'qr-tonghop')">
+            <span>⬇</span> Tải xuống
+          </button>
+          <button class="btn btn--copy" onclick="copyText(this, 'NGUYEN VAN DIA')">
+            <span>📋</span> Copy tên
+          </button>
+        </div>
       </div>
-      <div class="info">
-        <b>Ví MoMo</b><br>
-        Chủ TK: <b>NGUYEN VAN DIA</b>
+
+      <!-- Card: Vietcombank -->
+      <div class="card card--vcb">
+        <div class="card-logo-wrap">
+          <img src="./access/vietcombank.png" alt="Vietcombank" class="bank-logo" />
+        </div>
+
+        <div class="qr-wrapper">
+          <img src="./access/qr_bank.jpg" alt="QR Vietcombank" class="qr-img" />
+          <div class="qr-overlay">
+            <span class="overlay-icon">🔍</span>
+            <span class="overlay-text">Xem to</span>
+          </div>
+        </div>
+
+        <div class="card-info">
+          <p class="card-service">Ngân hàng Vietcombank</p>
+          <p class="card-owner">NGUYEN VAN DIA</p>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn--download" onclick="downloadQR('./access/qr_bank.jpg', 'qr-vietcombank')">
+            <span>⬇</span> Tải xuống
+          </button>
+          <button class="btn btn--copy" onclick="copyText(this, 'NGUYEN VAN DIA')">
+            <span>📋</span> Copy tên
+          </button>
+        </div>
       </div>
+
+      <!-- Card: MoMo -->
+      <div class="card card--momo">
+        <div class="card-logo-wrap">
+          <img src="./access/momo.png" alt="MoMo" class="bank-logo" />
+        </div>
+
+        <div class="qr-wrapper">
+          <img src="./access/qr_momo.jpg" alt="QR MoMo" class="qr-img" />
+          <div class="qr-overlay">
+            <span class="overlay-icon">🔍</span>
+            <span class="overlay-text">Xem to</span>
+          </div>
+        </div>
+
+        <div class="card-info">
+          <p class="card-service">Ví điện tử MoMo</p>
+          <p class="card-owner">NGUYEN VAN DIA</p>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn--download" onclick="downloadQR('./access/qr_momo.jpg', 'qr-momo')">
+            <span>⬇</span> Tải xuống
+          </button>
+          <button class="btn btn--copy" onclick="copyText(this, 'NGUYEN VAN DIA')">
+            <span>📋</span> Copy tên
+          </button>
+        </div>
+      </div>
+
     </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p>© 2025 · Nguyen Van Dia · QR Payment</p>
+    <p class="footer-sub">Dùng để copy ảnh khỏi phải tìm album 😄</p>
+  </footer>
+
+</div>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-box">
+    <img id="lightbox-img" src="" alt="QR Code" />
+    <p class="lightbox-label" id="lightbox-label"></p>
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   </div>
+</div>
 
-  <footer>© 2025 QR Payment | Dùng để coppy ảnh khỏi phải tìm abum 😄</footer>
+<script src="js/app.js"></script>
 </body>
 </html>
